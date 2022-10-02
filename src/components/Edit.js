@@ -1,12 +1,88 @@
-import React from 'react'
+import React,{useState,useContext} from 'react'
 import './Edit.css'
 import headShot from '../images/girl-photo.jpg'
 import pencilIcon from '../images/pencil-dark.png'
 import deleteIcon from '../images/delete-dark.png'
 import indianFlag from "../images/indian-flag.png"
 import cameraIcon from '../images/camera-fill.png'
+import {Context} from '../Context'
+import {useNavigate} from 'react-router-dom'
+
 
 function Edit() {
+    const {addUser,currentUserFound, userData} = useContext(Context)
+    const [cameraBtn, setCameraBtn] = useState(false)
+    const navigate = useNavigate()
+    const [userToAdd, setUserToAdd] = useState({
+        firstName:"",
+        lastName:"",
+        designation:"",
+        dateOfBirth:"",
+        gender:"",
+        phoneNumber:"",
+        address:"",
+        city:'',
+        state:'',
+        zipCode:'',
+        country:'',
+        headImage:'',
+        email:'',
+        password:""
+    })
+    const {firstName,
+    lastName,
+    designation,
+    dateOfBirth,
+    gender,
+    phoneNumber,
+    address,
+    city,
+    state,
+    zipCode,
+    country,
+    headImage,
+    email,
+    password} = userToAdd
+
+
+    function handleChange(e){
+        setUserToAdd({
+            ...userToAdd,
+            [e.target.name] : e.target.value
+        })
+    }
+
+    function SubmitButton(){
+        if (firstName&&
+            lastName&&
+            designation&&
+            dateOfBirth&&
+            gender&&
+            phoneNumber&&
+            address&&
+            city&&
+            state&&
+            zipCode&&
+            country&&
+            email&&
+            password){
+          return  <button className="save" onClick={addDetail}>
+          Save
+         </button>
+        } else {
+          return  <button className="save" onClick={addDetail} disabled>
+          Save
+         </button>
+        };
+      };
+
+    function addDetail(){
+        addUser(userToAdd)
+        currentUserFound(userToAdd)
+        navigate('/home')
+    }
+
+    // console.log(userToAdd)
   return (
     <div className="edit">
          <div className="headbar">
@@ -26,9 +102,9 @@ function Edit() {
 
                <div className="img__container fun">
                     <img className="main__img" src={headShot} alt="" />
-                    <button className='camera__btn'><img src={cameraIcon} alt="" /></button>
+                    <button className='camera__btn' onClick={() => setCameraBtn(preVal => !preVal)}><img src={cameraIcon} alt="" /></button>
                 </div>
-                <div className="edDel__box">
+                <div className="edDel__box" style={{display: cameraBtn ? 'block':'none'}}>
                     <div className="edit__box">
                         <img src={pencilIcon} alt="" className="" />
                         <p>Edit</p>
@@ -40,38 +116,37 @@ function Edit() {
                     </div>
                 </div>
                 <div className="name">
-                    <input type="text" name="" id="" placeholder='First Name'/>
-                    <input type="text" name="" id="" placeholder='Last Name' />
+                    <input type="text" name="firstName" value={firstName} id="" placeholder='First Name' onChange={(e)=>handleChange(e)}/>
+                    <input type="text" name="lastName" value={lastName} id="" placeholder='Last Name' onChange={(e)=>handleChange(e)} />
                 </div>
-                <input type="text" name="" id="" placeholder='Designation'/>
+                <input type="text" name="designation" value={designation} id="" placeholder='Designation' onChange={(e)=>handleChange(e)}/>
+                <input type="text" name="email" value={email} id="" placeholder='Email' onChange={(e)=>handleChange(e)}/>
             </div>
             <hr/>
             <div className="right__section">
                 <div className="dob__gender">
                     <div className="input__dob">
-                        <input type="date" placeholder="Date of birth" /> 
+                        <input type="date" name="dateOfBirth" value={dateOfBirth} placeholder="Date of birth" onChange={(e)=>handleChange(e)}/> 
                     </div>
                     <div className="input__gender">
-                       <select placeholder='Gender' name="" id="">
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                            <option value="Other">Other</option>
-                       </select>
+                       <input type="text" placeholder='Gender' name="gender" value={gender} id="" onChange={(e)=>handleChange(e)}>
+                       </input>
                     </div>
                 </div>
                 <div className="phone__number">
                     <img src={indianFlag} alt="" className="flag" />
-                    <input className="small__number" type="text" name="" id="" placeholder='Phone number' />
+                    <input className="small__number" type="text" name="phoneNumber" value={phoneNumber} id="" placeholder='Phone number' onChange={(e)=>handleChange(e)} />
                 </div>
-                <input type="text" placeholder='Address 1'/>
+                <input type="text" name="address" value={address} placeholder='Address 1' onChange={(e)=>handleChange(e)}/>
                 <div className="city__state">
-                    <input type="text" placeholder='City'/>
-                    <input type="text" name="" id="" placeholder='State'/>
+                    <input type="text" placeholder='City' name='city' value={city} onChange={(e)=>handleChange(e)}/>
+                    <input type="text" name="state" id="" placeholder='State' value={state} onChange={(e)=>handleChange(e)} />
                 </div>
                 <div className="zip__country">
-                    <input type="text" name="" id="" placeholder='Zip Code' />
-                    <input type="text" name="" id="" placeholder='Country'/>
+                    <input type="text" name="zipCode" id="" placeholder='Zip Code' value={zipCode} onChange={(e)=>handleChange(e)}/>
+                    <input type="text" name="country" id="" placeholder='Country' value={country} onChange={(e)=>handleChange(e)}/>
                 </div>
+                <input type="text" name="password" id="" placeholder='Set password' value={password} onChange={(e)=>handleChange(e)}/>
                 <p className="warning__text">
                     *All fields are compulsory
                 </p>
@@ -79,9 +154,7 @@ function Edit() {
                    <button className="cancel">
                     Cancel
                    </button>
-                   <button className="save">
-                    Save
-                   </button>
+                    <SubmitButton/>
                 </div>
             </div>
          </div>

@@ -47,10 +47,13 @@ img{
     top: 3em; */
     margin: .5em .5em .5em auto;
     box-shadow: 0px 2px 1.5px 1px rgba(0, 0, 0, 0.2);
-
-
+    cursor: pointer;
 }
-
+.pencil,
+.delete{
+    width: 1.5em;
+    height: 1.5em;
+}
 .delete__icon{
     
     width: 2em;
@@ -64,7 +67,10 @@ img{
     /* margin-left: auto; */
     margin: .5em .5em .5em auto;
     box-shadow: 0px 2px 1.5px 1px rgba(0, 0, 0, 0.2);
-
+    cursor:pointer;
+    display: flex;
+    align-items: center;
+    justify-content:center;
 }
 .top__details{
     display: flex;

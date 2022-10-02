@@ -52,6 +52,7 @@ img {
     /* border: solid red 1px; */
     margin-top: -2.5em;
     margin-left: 6.5em;
+    cursor: pointer;
 }
 
 .camera__btn > img{
@@ -200,11 +201,13 @@ select{
     background-color: rgb(111, 211, 188);
     color: white;
     margin-left: 0.5em;
+    cursor: pointer;
 }
 
 .cancel{
     background-color:grey;
     color: white;
+    cursor: pointer;
 }
 /*  */
 

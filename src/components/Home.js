@@ -1,9 +1,17 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import './Home.css'
 import headShot from '../images/girl-photo.jpg'
 import pencilIcon from '../images/pencil-line.png'
 import deleteIcon from '../images/delete-bin-7-line.png'
+import {Context} from '../Context'
+import {useNavigate} from "react-router-dom"
 function Home() {
+    const navigate = useNavigate()
+    const {user,removeUser} = useContext(Context) 
+    function handleDeleteRedirect(){
+        removeUser(user.email)
+        navigate('/')
+    }
   return (
     <div className='home'>
         <div className="headbar">
@@ -15,11 +23,11 @@ function Home() {
             </div>
         </div>
         <div className="home__content">
-            <div className="pencil__icon">
-                <img src={pencilIcon} alt="" />
+            <div className="pencil__icon" onClick={() => navigate('/edit')}>
+                <img src={pencilIcon} className="pencil" alt="" />
             </div>
-            <div className="delete__icon">
-                <img src={deleteIcon} alt="" />
+            <div className="delete__icon"  onClick={() => handleDeleteRedirect()}>
+                <img src={deleteIcon} alt="" className='delete' />
             </div>
 
             <div className="top__details">
@@ -27,10 +35,10 @@ function Home() {
                     <img className="main__img" src={headShot} alt="" />
                 </div>
                 <h1 className="empl__name">
-                    Jenny Carreon
+                    {user.firstName} {user.lastName}
                 </h1>
                 <p className="designation">
-                    HR Manager
+                    {user.designation}
                 </p>
             </div>
             <div className="low__details">
@@ -39,7 +47,7 @@ function Home() {
                         Gender
                     </p>
                     <p className="dark__text">
-                        Female
+                        {user.gender}
                     </p>
                 </div>
                 
@@ -48,7 +56,7 @@ function Home() {
                         DOB
                     </p>
                     <p className="dark__text">
-                        18/10/2000
+                        {user.dateOfBirth}
                     </p>
                 </div>
 
@@ -57,7 +65,7 @@ function Home() {
                         Nationality
                     </p>
                     <p className="dark__text">
-                        Turkey
+                        {user.country}
                     </p>
                 </div>
             </div>
