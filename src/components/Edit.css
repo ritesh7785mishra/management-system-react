@@ -204,6 +204,16 @@ select{
     cursor: pointer;
 }
 
+.save:hover ,
+.cancel:hover{background-color: #3e8e41}
+
+.save:active,
+.cancel:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
 .cancel{
     background-color:grey;
     color: white;

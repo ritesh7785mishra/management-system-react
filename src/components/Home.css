@@ -48,6 +48,7 @@ img{
     margin: .5em .5em .5em auto;
     box-shadow: 0px 2px 1.5px 1px rgba(0, 0, 0, 0.2);
     cursor: pointer;
+    margin-bottom: 1.5em;
 }
 .pencil,
 .delete{
@@ -71,6 +72,16 @@ img{
     display: flex;
     align-items: center;
     justify-content:center;
+}
+
+.delete__icon:hover ,
+.pencil__icon:hover{background-color: #3e8e41}
+
+.delete__icon:active,
+.pencil__icon:active{
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
 .top__details{
     display: flex;

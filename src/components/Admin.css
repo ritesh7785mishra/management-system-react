@@ -27,6 +27,13 @@
     align-items: center;
     cursor: pointer;
 }
+.bgClr:hover {background-color: #3e8e41}
+
+.bgClr:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
 .btn__config{
     display: flex;
     align-items: center;
