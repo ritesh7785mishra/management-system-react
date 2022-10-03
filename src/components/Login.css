@@ -48,3 +48,23 @@ body{
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
+
+.lock{
+    align-self: flex-end;
+    height: 1.5em;
+    width: 1.5em;
+    cursor: pointer;
+}
+
+.lock > img {
+    width: 100%;
+    height: 100%;
+}
+
+
+
+.lock:active {
+  
+ 
+  transform: translateY(4px);
+}

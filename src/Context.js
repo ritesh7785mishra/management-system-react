@@ -9,7 +9,7 @@ function ContextProvider({children}){
     useEffect(()=>{
         setUserData(data)
         console.log(data)
-    },[user])
+    },[])
 
     function removeUser(email){
         setUserData(prevUsers => prevUsers.filter(user => user.email !== email))
